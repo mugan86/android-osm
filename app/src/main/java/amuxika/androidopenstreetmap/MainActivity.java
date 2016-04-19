@@ -5,21 +5,18 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
-import org.osmdroid.api.IMapController;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
@@ -57,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
         mapView.setBuiltInZoomControls(true);
 
         mMapController = (MapController) mapView.getController();
-        mMapController.setZoom(13);
+        mMapController.setZoom(2);
 
 
-        Drawable marker=getResources().getDrawable(android.R.drawable.star_big_on);
+        Drawable marker = getResources().getDrawable(android.R.drawable.star_big_on);
         int markerWidth = marker.getIntrinsicWidth();
         int markerHeight = marker.getIntrinsicHeight();
         marker.setBounds(0, markerHeight, markerWidth, 0);
@@ -70,16 +67,22 @@ public class MainActivity extends AppCompatActivity {
         myItemizedOverlay = new MyItemizedOverlay(marker, resourceProxy);
         mapView.getOverlays().add(myItemizedOverlay);
 
-        GeoPoint myPoint1 = new GeoPoint(0*1000000, 0*1000000);
+        GeoPoint myPoint1 = new GeoPoint(0 * 1000000, 0 * 1000000);
         myItemizedOverlay.addItem(myPoint1, "myPoint1", "myPoint1");
-        GeoPoint myPoint2 = new GeoPoint(50*1000000, 50*1000000);
+        GeoPoint myPoint2 = new GeoPoint(50 * 1000000, 50 * 1000000);
         myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
 
 
         //Set Map Center position
         mMapController.setCenter(new GeoPoint(15.610762, 32.540345));
 
-
+        //--- Create Another Overlay for multi marker
+        myItemizedOverlay.addItem(new GeoPoint(38.883333, -77.016667), "myPoint2", "myPoint2");
+        myItemizedOverlay.addItem(new GeoPoint(39.916667, 116.383333), "China", "China");
+        myItemizedOverlay.addItem(new GeoPoint(51.5, -0.116667), "United Kingdom", "United Kingdom");
+        myItemizedOverlay.addItem(new GeoPoint(52.516667, 13.383333), "Germany", "Germany");
+        myItemizedOverlay.addItem(new GeoPoint(38.316667, 127.233333), "Korea", "Korea");
+        myItemizedOverlay.addItem(new GeoPoint(28.613333, 77.208333), "India", "India");
     }
 
     @Override
