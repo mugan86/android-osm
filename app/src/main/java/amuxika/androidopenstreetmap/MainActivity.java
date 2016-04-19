@@ -15,12 +15,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,17 +77,28 @@ public class MainActivity extends AppCompatActivity {
         GeoPoint myPoint2 = new GeoPoint(50 * 1000000, 50 * 1000000);
         myItemizedOverlay.addItem(myPoint2, "myPoint2", "myPoint2");
 
+        try {
+            List<MyItem> items = Utils.read(MainActivity.this);
+
+            for(int i = 0; i < items.size(); i++)
+            {
+                myItemizedOverlay.addItem(items.get(i).getPosition(), "Position " + (i+1), "Position " + (i+1));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         //Set Map Center position
         mMapController.setCenter(new GeoPoint(15.610762, 32.540345));
 
         //--- Create Another Overlay for multi marker
-        myItemizedOverlay.addItem(new GeoPoint(38.883333, -77.016667), "myPoint2", "myPoint2");
+        /*myItemizedOverlay.addItem(new GeoPoint(38.883333, -77.016667), "myPoint2", "myPoint2");
         myItemizedOverlay.addItem(new GeoPoint(39.916667, 116.383333), "China", "China");
         myItemizedOverlay.addItem(new GeoPoint(51.5, -0.116667), "United Kingdom", "United Kingdom");
         myItemizedOverlay.addItem(new GeoPoint(52.516667, 13.383333), "Germany", "Germany");
         myItemizedOverlay.addItem(new GeoPoint(38.316667, 127.233333), "Korea", "Korea");
-        myItemizedOverlay.addItem(new GeoPoint(28.613333, 77.208333), "India", "India");
+        myItemizedOverlay.addItem(new GeoPoint(28.613333, 77.208333), "India", "India");*/
     }
 
     @Override
@@ -160,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+
 
 
 
