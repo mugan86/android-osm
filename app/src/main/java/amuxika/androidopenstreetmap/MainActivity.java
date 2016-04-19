@@ -22,10 +22,6 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mapView.setBuiltInZoomControls(true);
 
         mMapController = (MapController) mapView.getController();
-        mMapController.setZoom(2);
+        mMapController.setZoom(13);
 
 
         Drawable marker = getResources().getDrawable(android.R.drawable.star_big_on);
@@ -88,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         //Set Map Center position
-        mMapController.setCenter(new GeoPoint(15.610762, 32.540345));
+        mMapController.setCenter(new GeoPoint(51.5099460, -0.1300150));
+
 
         //--- Create Another Overlay for multi marker
         /*myItemizedOverlay.addItem(new GeoPoint(38.883333, -77.016667), "myPoint2", "myPoint2");
