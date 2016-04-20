@@ -87,9 +87,9 @@ public class ActivityWithCluster extends AppCompatActivity implements MapEventsR
         map.getOverlays().add(startMarker);
 
 
-        List<MyItem> pois = null;
+        List<POI> pois = null;
         try {
-            pois = Utils.read(ActivityWithCluster.this);
+            pois = Utils.readPOI(ActivityWithCluster.this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -128,12 +128,12 @@ public class ActivityWithCluster extends AppCompatActivity implements MapEventsR
         map.getOverlays().add(poiMarkers);
         Drawable poiIcon = getResources().getDrawable(R.drawable.marker_poi_default);
         if (pois != null) {
-            for (MyItem poi:pois){
+            for (POI poi:pois){
                 Marker poiMarker = new Marker(map);
                 poiMarker.setTitle("Title");
                 poiMarker.setSnippet("DEsc");
-                poiMarker.setPosition(poi.getPosition());
-                poiMarker.setIcon(poiIcon);
+                poiMarker.setPosition(poi.mLocation);
+                //poiMarker.setIcon(poiIcon);
                 /*
                 if (poi.mThumbnail != null){
                     poiMarker.setImage(new BitmapDrawable(poi.mThumbnail));
