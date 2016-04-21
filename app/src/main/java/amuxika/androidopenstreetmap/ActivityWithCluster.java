@@ -120,10 +120,10 @@ public class ActivityWithCluster extends AppCompatActivity implements MapEventsR
         poiMarkers.setIcon(clusterIcon);
         //end of 10.
         //11. Customizing the clusters design
-        poiMarkers.getTextPaint().setTextSize(12.0f);
+        poiMarkers.getTextPaint().setTextSize(20.0f);
         poiMarkers.mAnchorV = Marker.ANCHOR_BOTTOM;
-        poiMarkers.mTextAnchorU = 0.70f;
-        poiMarkers.mTextAnchorV = 0.27f;
+        poiMarkers.mTextAnchorU = 0.90f;
+        poiMarkers.mTextAnchorV = 0.47f;
         //end of 11.
         map.getOverlays().add(poiMarkers);
         Drawable poiIcon = getResources().getDrawable(R.drawable.marker_poi_default);
@@ -193,7 +193,7 @@ public class ActivityWithCluster extends AppCompatActivity implements MapEventsR
         ArrayList<GeoPoint> mTrace;
         Polyline mPolyline;
         OnMarkerDragListenerDrawer() {
-            mTrace = new ArrayList<GeoPoint>(100);
+            mTrace = new ArrayList<>(100);
             mPolyline = new Polyline(map.getContext());
             mPolyline.setColor(0xAA0000FF);
             mPolyline.setWidth(2.0f);
@@ -225,7 +225,7 @@ public class ActivityWithCluster extends AppCompatActivity implements MapEventsR
                         Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mSelectedPoi.mUrl));
                         view.getContext().startActivity(myIntent);
                     } else {
-                        Toast.makeText(view.getContext(), "Button clicked", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), "Button clicked \n" + mSelectedPoi.mLocation.getLatitude() + " / " + mSelectedPoi.mLocation.getLongitude(), Toast.LENGTH_LONG).show();
                     }
                 }
             });
